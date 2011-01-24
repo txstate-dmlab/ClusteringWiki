@@ -1,0 +1,74 @@
+<!--
+ *  ClusteringWiki - personalized and collaborative clustering of search results
+ *  Copyright (C) 2010  Texas State University-San Marcos
+ *  
+ *  Contact: http://dmlab.cs.txstate.edu
+ * 
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+ 
+<%@ include file="include.jsp" %>
+<%@page import="edu.txstate.dmlab.clusteringwiki.app.IApplicationUser" %> 
+<%@page import="edu.txstate.dmlab.clusteringwiki.web.AppContextListener" %> 
+<%
+  //find if logged in//get reference to application user
+  IApplicationUser appUser = (IApplicationUser) AppContextListener.getWebAppCtx().getBean("applicationUser");
+
+  String userFirstName = null;
+  if( appUser != null && appUser.isLoggedIn() ) 
+	  userFirstName = appUser.getFirstName() != null && !appUser.getFirstName().equals("") ? 
+		 appUser.getFirstName() : appUser.getEmail() ;
+  //get current document name
+  String[] uri = request.getServletPath().split("\\/");
+  String doc = null;
+  if(uri.length > 0) doc = uri[uri.length - 1];
+  final int dot = doc.lastIndexOf(".");
+  if(doc != null && dot  > -1) doc = doc.substring(0, dot);
+  //see if we are in a test
+  boolean inTest = false;
+  String executionId = "";
+  final HttpSession session = request.getSession(true);
+  if(session != null && session.getAttribute("executionId") != null){
+	  inTest = true;
+	  executionId = (String) session.getAttribute("executionId");
+  }
+%>
+<!-- being banner -->
+
+<%@page import="org.springframework.beans.factory.annotation.Autowired"%></head>
+<body>
+
+<div id="header">
+	<div id="topBarLeft" class="hidden">
+		<nobr>
+			<a href="index.html" <% if(doc.equalsIgnoreCase("index")) out.print("class='selected'"); %> >Search</a> &nbsp;
+			<a href="about.html" <% if(doc.equalsIgnoreCase("about")) out.print("class='selected'"); %> >About</a> 
+			<% if(appUser.isLoggedIn() && appUser.isAdmin()) {  %>  &nbsp; <a href="admin.html" <% if(doc.equalsIgnoreCase("admin")) out.print("class='selected'"); %> >Admin</a> <%	} %> 
+		</nobr>
+	</div>
+	<div id="topBarRight" class="hidden">
+		<nobr>
+			
+			<% if(userFirstName != null) out.print("Welcome, " + userFirstName + " &nbsp; <a href=\"logout.html\"  >Logout</a>");
+				else { %>
+			<a href="login.html" <% if(doc.equalsIgnoreCase("login")) out.print("class='selected'"); %> >Login</a>
+			<%	} %>  &nbsp;
+			<% if(inTest) out.print(" &nbsp;  <a href=\"index.html?endTest=1\"  >End test " + executionId + "</a>  &nbsp; "); %>
+			<a href="help.html" <% if(doc.equalsIgnoreCase("help")) out.print("class='selected'"); %> >Help</a>
+		</nobr>
+	</div>
+</div>
+<center>
+
+<!-- end banner -->

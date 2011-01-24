@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<import resource="applicationContext.xml" />
+   
+	<!-- look for spring components with anotations -->
+    <context:component-scan base-package="edu.txstate.dmlab.clusteringwiki.web" />
+	
+    <!--
+	- message bundles.
+	-->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	    <property name="basename" value="messages" />
+	</bean>
+    
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="mail.cs.txstate.edu" />
+	</bean>
+	
+	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+  		<property name="from" value="NO_REPLY_ClusteringWiki@dmlab.cs.txstate.edu" />
+  		<property name="bcc" value="david.anastasiu@txstate.edu" />
+  		<property name="subject" value="ClusteringWiki credentials request" />
+	</bean>
+	
+	<bean id="webViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		p:viewClass="org.springframework.web.servlet.view.JstlView"
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" p:order="2"/>
+  
+</beans> 

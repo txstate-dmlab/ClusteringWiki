@@ -1,0 +1,288 @@
+/**
+ *  ClusteringWiki - personalized and collaborative clustering of search results
+ *  Copyright (C) 2010  Texas State University-San Marcos
+ *  
+ *  Contact: http://dmlab.cs.txstate.edu
+ * 
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+ /* Tree */
+.ecTree {	
+	margin: 0px;
+	padding: 2px;
+	height: 100%;
+	display: block;
+	overflow: auto;
+}
+.ecTree li {
+	list-style: none;
+	margin: 0px;
+	padding: 0px 0px 0px 38px;
+	line-height: 16px;
+}
+.ecTree li span {
+	white-space: normal;
+	maximum-width: 230px;
+	width: 230px;
+}
+.ecTree .addedPath {
+	color: red;
+	font-weight: bold;
+	vertical-align: top;
+}
+.ecTree .trigger {
+	display: block;
+	margin-left: -38px;
+	width: 28px;
+	height: 11px;
+	cursor: pointer;
+}
+.ecTree ul {
+	margin: 0px; 
+	padding: 1px;
+}
+.ecTree .root {
+	position: absolute; 
+	margin-left: -16px;
+	background: url(../images/tree/root.gif) no-repeat 16px 0 #ffffff;
+	maximum-width: 315px;
+	width: 315px;
+	border-right: 1px solid #DDD;
+	/* color: #1569C7; */
+	color: #333;
+	font-size: 12px;
+	padding-bottom: 150px;
+}
+.ecTree .cluster-open {
+	margin-left: -16px;
+	background: url(../images/tree/collapsable.gif) 0 -2px no-repeat #fff;
+}
+.ecTree .cluster-open-last {
+	margin-left: -16px;
+	background: url(../images/tree/collapsable-last.gif) 0 -2px no-repeat #fff;
+}
+.ecTree .cluster-closed {
+	margin-left: -16px;
+	background: url(../images/tree/expandable.gif) 0 -2px no-repeat #fff;
+}
+.ecTree .cluster-closed-last {
+	margin-left: -16px;
+	background: url(../images/tree/expandable-last.gif) 0 -2px no-repeat #fff;
+}
+.ecTree .bottom-node {
+	margin-left: -16px;
+	background: url(../images/tree/leaf.gif) 0 -1px no-repeat #fff;
+}
+.ecTree .bottom-node-last {
+	margin-left: -16px;
+	background: url(../images/tree/leaf-last.gif) 0 -1px no-repeat #fff;
+}
+.ecTree .ajax {
+	background: url(../images/tree/spinner.gif) no-repeat 0 0 #ffffff;
+	height: 16px;
+	display: none;
+}
+.ecTree .ajax li {
+	display: none;
+	margin: 0; 
+	padding: 0;
+}
+.ecTree .label, .ecTree .size {
+	cursor: default;
+	display: inline !important; 
+}
+.ecTree .active {
+	background: #DFDFDF;
+}
+.ecTree .selected >span {
+	font-weight: bold;
+}
+.ecTree .copied >span {
+	color: #666;
+}
+.ecTree .cut >span {
+	color: #A9A9A9;
+}
+#dragContainer {
+	background: #ffffff;
+	color: #000;
+	font: normal 11px arial, tahoma, helvetica, sans-serif;
+	border: 1px dashed #767676; /* it creates a dashed area in drag and drop */
+}
+#dragContainer ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#dragContainer li {
+	list-style: none;
+	background-color: #ffffff;
+	line-height: 18px;
+	white-space: nowrap;
+	padding: 1px 1px 0px 16px;
+	margin: 0;
+}
+#dragContainer li span {
+	padding: 0;
+}
+#dragContainer li.bottom-node, #dragContainer li.bottom-node-last {
+	background: url(../images/tree/leaf.gif) no-repeat -17px 0 #ffffff;
+}
+#dragContainer .cluster-closed, #dragContainer .cluster-closed-last {
+	background: url(../images/tree/expandable.gif) no-repeat -17px 0 #ffffff;
+}
+#dragContainer .cluster-open, #dragContainer .cluster-open-last {
+	background: url(../images/tree/collapsable.gif) no-repeat -17px 0 #ffffff;
+}
+#ectMessage {
+	opacity: 0.9;
+	padding: 8px;
+	font: normal 12px arial, tahoma, helvetica, sans-serif;
+}
+.contextMenu {
+	display: none;
+	position: absolute;
+	border: #999 1px solid;
+	width: auto;
+	height: auto;
+	z-index: 499;
+	opacity: 0.9;
+	background: #fff;
+}
+.contextMenu span {
+	list-style-type: none;
+	text-align: left;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	display: block;
+}
+/* to much space in Internet Explorer 7 */
+*+ html .contextMenu li {
+	padding-bottom: 0;
+}
+.contextMenu span:Hover {
+	background-color: #0066CC;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+#activeElement {
+	text-align: center;
+	padding-top: 4px;
+	min-width: 210px;
+	width: 25%;
+	left: 37%;
+	font-size: 14px;
+	height: 20px;
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+#ecTreeInput {
+	width: 280px;	
+}
+/* response */
+#pageCenter {
+	margin-top: 20px;
+	width: 1000px;
+	height: auto !important;
+	margin: auto;
+	padding-left: none;
+	text-align: left;
+}
+#cluster {
+	width: 330px;
+	float: left;
+	display: inline;
+	text-align: left;
+	margin-left: 10px;
+}
+.showBox {
+	width: 100%;
+	border: 1px dashed #dfdfdf;
+}
+.showBox pre, .showBox div {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	min-height: 30px;
+	height: auto !important;
+	height: 30px;
+	font-size: small;
+	font-family: 'Palatino Linotype', Palatino, serif;
+	color: #076901;
+	font-style: italic;
+}
+#response {
+	min-height: 400px;
+	height: auto !important;
+	height: 400px;
+	float: right;
+	width: 620px;
+	display: inline;
+	margin-top: 18px;
+}
+#responseFooter {
+	float: right;
+	width: 620px;
+	display: inline;
+	margin-top: 15px;
+	padding-bottom: 18px;
+	text-align: center;
+}
+#response .entry {
+	text-align: left;
+	margin-left: 15px;
+	width: 95%;
+	padding-bottom: 18px;
+	cursor: default;
+}
+#response .active-page {
+	background: #DFDFDF; 
+}
+#response .addedPath {
+	color: red;
+	font-weight: bold;
+	vertical-align: top;
+	cursor: default;
+}
+#response .title {
+	font-size: 13px;
+}
+#response .url {
+	color: #076901;
+	font-size: small;
+}
+#response .cached {
+	font-size: small;
+}
+#response .copied-page {
+	border: 1px dashed #666;	
+}
+#response .cut-page {
+	border: 1px dashed #A9A9A9;
+}
+
+/* general */
+.center {
+	text-align: center;
+}
+.error {
+	color: red;  /* 5C0402 */
+}
+.success {
+	color: green;  /*fern green*/
+}

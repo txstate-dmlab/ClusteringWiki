@@ -1,0 +1,60 @@
+/**
+ *  ClusteringWiki - personalized and collaborative clustering of search results
+ *  Copyright (C) 2010  Texas State University-San Marcos
+ *  
+ *  Contact: http://dmlab.cs.txstate.edu
+ * 
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+ 
+.inner_login {
+	position: relative;
+	text-align: left;
+  	margin-left: auto;
+  	margin-right: auto;
+	top: 10px;
+	width: 260px;
+	height: 170px;
+	padding: 15px;
+	border: 1px solid #4A91C3;
+}
+.login_form {
+  	margin-left: auto;
+  	margin-right: auto;
+}
+#loginForm div {
+	margin-left: 10px;
+	width: 235px;
+	text-align: right;
+	padding-top: 5px;
+}
+.login_error {
+	position: relative;
+	top: 75px;
+	color: #CD2626;
+	font: normal 1.1em "Trebuchet MS",sans-serif;
+}
+.message {
+    font-family: arial; 
+    font-size: 12px; 
+    width: 433px; 
+    margin-top: 10px;
+    margin-bottom: 10px; 
+    padding: 0 10px;
+}
+.forgotPass {
+	position: relative;
+	float: right;
+}

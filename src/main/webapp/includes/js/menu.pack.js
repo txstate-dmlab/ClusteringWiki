@@ -1,0 +1,1 @@
+$().ready(function(){$("#topBarLeft").fadeIn(300);$("#topBarRight").fadeIn(300);$("#footer").fadeIn(300)});function onEnter(field,methodCall){$("#"+field).keyup(function(e){if(e.keyCode==13){try{eval(methodCall+"()")}catch(exception){}}})};

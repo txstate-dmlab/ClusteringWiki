@@ -1,0 +1,190 @@
+/**
+ *  ClusteringWiki - personalized and collaborative clustering of search results
+ *  Copyright (C) 2010  Texas State University-San Marcos
+ *  
+ *  Contact: http://dmlab.cs.txstate.edu
+ * 
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+ /** general page style */
+body {
+    margin:0;
+	font-family:arial,sans-serif;
+	font-size:12px;
+	background:#fff;
+    color:black
+}
+td {
+    line-height:.8em;
+    
+}
+em {
+    font-weight:bold;
+    font-style:normal
+}
+input {
+    font-family:inherit;
+	-moz-box-sizing:content-box
+}
+a {
+    color:#12d;
+    text-decoration:none
+}
+a:hover,a:active {
+    text-decoration:underline
+}
+a:visited {
+    color:#12d
+}
+pre {
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+.hidden {
+	display: none
+}
+.error {
+	color: red;
+}
+.success {
+	color: green;
+}
+
+/* Form */
+form {
+	margin: 0;
+	padding: 0;
+}
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+legend {
+	display: none;
+}
+input, textarea, select {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+}
+
+/* top bar */
+#header {
+	padding-left: 2px !important;
+	padding-right: 2px !important;
+	height:25px
+}
+#topBarLeft {
+	font-size:12px;
+    padding-top:2px !important;
+    float:left;
+    height:23px
+}
+#topBarRight {
+	font-size:12px;
+    padding-top:2px !important;
+    text-align:right
+}
+#header .selected {
+	font-weight: bold;
+	color: #000;
+}
+#title {
+	position: relative;
+	float: left;
+	padding-left: 30%;
+}
+
+/* search box */
+#box {
+	width: 1024px;
+	height: 100px;
+}
+#logo {
+	position: relative;
+	float:left;
+	margin-left: 0px;
+	padding-left: 25px;
+	padding-right: 10px;
+}
+#logo img {
+	float: left;
+}
+#logow {
+	font-size: 2.3em;
+	font-family: 'Palatino Linotype', Palatino, serif;
+	color: #076901;
+	background-color: none;
+	font-weight: bold;
+	font-variant: small-caps;
+	line-height: 0.8em;
+	vertical-align: middle;
+	position: relative;
+}
+
+/* searchbox */
+#searchbox {
+	float: left;
+	vertical-align: top;
+	margin-top: 8px;
+	text-align: left;
+}
+#searchbox table {
+	padding: 1px; 0px; 0px;
+	text-align: left;
+}
+input.search {
+	width:480px;
+	font: 14px arial,sans-serif;
+	heigh: 20px;
+}
+#searchbox .searchBtn {
+	vertical-align: bottom;
+}
+#stats {
+	font-size: x-small;
+	text-align: left;
+}
+
+/* message boxes */
+#testMessages {
+	margin-top: -50px;
+}
+
+
+/* rpanel */
+#rpanel {
+	margin-left: 0;
+	width: 755px;
+	display: block;
+	text-align: left;
+}
+
+/* footer */
+#footer {
+	margin: 15px auto; 
+	text-align: center;
+	font-size: small;
+	color: #999;
+	clear: both;
+	
+}
+#footer a {
+	color: #888;
+}

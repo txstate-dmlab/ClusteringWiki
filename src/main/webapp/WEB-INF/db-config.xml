@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:configurator="http://cocoon.apache.org/schema/configurator"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://cocoon.apache.org/schema/configurator http://cocoon.apache.org/schema/configurator/cocoon-configurator-1.0.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+  
+	<!--
+	 - Cocoon Spring Configurator 
+	 - runningMode must be set to "dev" or "prod" for appropriate environment deploying to
+	-->
+	<configurator:settings runningMode="prod"/> 
+
+  
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver.className}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="autoCommitOnClose"> <value>true</value></property>
+		<property name="idleConnectionTestPeriod"><value>15</value> </property>
+		<property name="maxIdleTime"> <value>15</value> </property>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="packagesToScan" value="edu.txstate.dmlab.clusteringwiki.entity, edu.txstate.dmlab.clusteringwiki.dao" />
+		<property name="annotatedClasses">
+            <list>
+                <value>edu.txstate.dmlab.clusteringwiki.entity.ClusterEdit</value>
+                <value>edu.txstate.dmlab.clusteringwiki.entity.CredentialsRequest</value>
+                <value>edu.txstate.dmlab.clusteringwiki.entity.Query</value>
+                <value>edu.txstate.dmlab.clusteringwiki.entity.QueryResponse</value>
+                <value>edu.txstate.dmlab.clusteringwiki.entity.User</value>
+                <value>edu.txstate.dmlab.clusteringwiki.dao.ClusterEditDao</value>
+                <value>edu.txstate.dmlab.clusteringwiki.dao.CredentialsRequestDao</value>
+                <value>edu.txstate.dmlab.clusteringwiki.dao.QueryDao</value>
+                <value>edu.txstate.dmlab.clusteringwiki.dao.QueryResponseDao</value>
+                <value>edu.txstate.dmlab.clusteringwiki.dao.UserDao</value>
+            </list>
+        </property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${jdbc.hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${jdbc.hibernate.format_sql}</prop>
+				<prop key="hibernate.c3p0.initialPoolSize">1</prop>
+				<prop key="hibernate.c3p0.minPoolSize">1</prop>
+				<prop key="hibernate.c3p0.maxPoolSize">30</prop>
+				<prop key="hibernate.c3p0.acquireIncrement">2</prop>
+				<prop key="hibernate.c3p0.timeout">1800</prop>
+				<prop key="hibernate.c3p0.maxStatements">100</prop> 
+				<prop key="hibernate.c3p0.idleConnectionTestPeriod">300</prop>
+				<prop key="hibernate.generate_statistics">false</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<tx:annotation-driven />
+
+    
+</beans> 
